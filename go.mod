@@ -1,4 +1,4 @@
-module github.com/rubblelabs/ripple
+module github.com/asovetnikov/ripple
 
 go 1.17
 
