@@ -191,6 +191,34 @@ type DepositPreauth struct {
 	OwnerNode *NodeIndex       `json:",omitempty"`
 }
 
+type NFToken struct {
+	NFTokenID Hash256        `json:",omitempty"`
+	URI       VariableLength `json:",omitempty"`
+}
+
+// NFTokens is defined as map. Doesn't work properly unless defined like this.
+type NFTokens []map[string]NFToken
+
+type NFTokenPage struct {
+	leBase
+	Flags           LedgerEntryFlag `json:",omitempty"`
+	PreviousPageMin *Hash256        `json:",omitempty"`
+	NextPageMin     *Hash256        `json:",omitempty"`
+	NFTokens        NFTokens        `json:",omitempty"`
+}
+
+type NFTokenOffer struct {
+	leBase
+	Owner       Account  `json:",omitempty"`
+	NFTokenID   Hash256  `json:",omitempty"`
+	Amount      Amount   `json:",omitempty"`
+	Expiration  *uint32  `json:",omitempty"`
+	Destination *Account `json:",omitempty"`
+	//OwnerNode        *VariableLength `json:",omitempty"`
+	//NFTokenOfferNode *VariableLength `json:",omitempty"`
+	Flags uint32 `json:",omitempty"`
+}
+
 func (a *AccountRoot) Affects(account Account) bool {
 	return a.Account != nil && a.Account.Equals(account)
 }
@@ -225,6 +253,9 @@ func (p *Check) Affects(account Account) bool {
 func (d *DepositPreauth) Affects(account Account) bool {
 	return (d.Account != nil && d.Account.Equals(account)) || (d.Authorize != nil && d.Authorize.Equals(account))
 }
+
+func (p *NFTokenPage) Affects(account Account) bool  { return false }
+func (p *NFTokenOffer) Affects(account Account) bool { return false }
 
 func (le *leBase) GetType() string                     { return ledgerEntryNames[le.LedgerEntryType] }
 func (le *leBase) GetLedgerEntryType() LedgerEntryType { return le.LedgerEntryType }

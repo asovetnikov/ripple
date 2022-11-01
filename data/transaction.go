@@ -143,6 +143,40 @@ type PaymentChannelClaim struct {
 	PublicKey *PublicKey      `json:",omitempty"`
 }
 
+type NFTokenMint struct {
+	TxBase
+	NFTokenTaxon uint32
+	Issuer       *Account        `json:",omitempty"`
+	TransferFee  *uint16         `json:",omitempty"`
+	URI          *VariableLength `json:",omitempty"`
+}
+
+type NFTokenBurn struct {
+	TxBase
+	NFTokenID Hash256 `json:",omitempty"`
+}
+
+type NFTokenCreateOffer struct {
+	TxBase
+	Owner       *Account `json:",omitempty"`
+	NFTokenID   Hash256  `json:",omitempty"`
+	Amount      Amount   `json:",omitempty"`
+	Expiration  *uint32  `json:",omitempty"`
+	Destination *Account `json:",omitempty"`
+}
+
+type NFTokenAcceptOffer struct {
+	TxBase
+	NFTokenSellOffer *Hash256 `json:",omitempty"`
+	NFTokenBuyOffer  *Hash256 `json:",omitempty"`
+	BrokerFee        *Amount  `json:",omitempty"`
+}
+
+type NFTokenCancelOffer struct {
+	TxBase
+	NFTokenOffers Vector256 `json:",omitempty"`
+}
+
 // CheckCreate, CheckCash, CheckCancel enabled by amendment 157D2D480E006395B76F948E3E07A45A05FE10230D88A7993C71F97AE4B1F2D1
 
 // https://ripple.com/build/transactions/#checkcreate

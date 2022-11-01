@@ -8,14 +8,14 @@ import (
 // Transfer is a directional representation of a RippleState or AccountRoot balance change.
 // Payments and OfferCreates lead to the creation of zero or more Transfers.
 //
-// 	TransitFee is earned by the Issuer
-// 	QualityIn and QualityOut are earned by the Liquidity Provider and can be negative.
+//	TransitFee is earned by the Issuer
+//	QualityIn and QualityOut are earned by the Liquidity Provider and can be negative.
 //
 // Four scenarios:
-// 	1. XRP -> XRP
-// 	2. XRP -> IOU/Issuer 			Requires an orderbook
-// 	3. IOU/Issuer -> XRP			Requires an orderbook
-// 	4. IOU/IssuerA <-> IOU/IssuerB		Also known as Rippling, requires an account which trusts both currency/issuer pairs
+//  1. XRP -> XRP
+//  2. XRP -> IOU/Issuer 			Requires an orderbook
+//  3. IOU/Issuer -> XRP			Requires an orderbook
+//  4. IOU/IssuerA <-> IOU/IssuerB		Also known as Rippling, requires an account which trusts both currency/issuer pairs
 type Transfer struct {
 	Source             Account
 	Destination        Account

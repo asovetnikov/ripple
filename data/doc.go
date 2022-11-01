@@ -2,7 +2,7 @@
 Package data aims to provides all the data types that are needed to build tools,
 clients and servers for use on the Ripple network.
 
-Ledger
+# Ledger
 
 The ledger is a mixture of various data types, all persisted in the form of a
 key and value. The value contains a node, and some nodes refer to other nodes by
@@ -22,7 +22,7 @@ are always 32 bytes in length and involve the use of the SHA512 cryptographic
 hash algorithm, discarding the last 32 bytes of the resulting hash. Sometimes
 they are the same thing, sometimes not.
 
-LedgerHeader
+# LedgerHeader
 
 This is the root of the two trees for a single ledger. It contains information
 about the ledger and its predecessor. A ledger header node is never reused
@@ -35,7 +35,7 @@ between ledgers.
 	Key:	Index
 	Value:	LedgerSequence:LedgerSequence:NT_LEDGER:HP_LEDGER_MASTER:Node
 
-Inner Node
+# Inner Node
 
 This is a node in either the transaction or account state tree which contains up
 to 16 hashes of other nodes. The position of the hash represents a 4 bit nibble
@@ -49,7 +49,7 @@ may be reused between ledgers, a transaction inner node will never be reused.
 	Key: 	Index
 	Value:	LedgerSequence:LedgerSequence:NT_ACCOUNT_NODE or NT_TRANSACTION_NODE:HP_INNER_NODE:Node
 
-TransactionWithMetadata Node
+# TransactionWithMetadata Node
 
 This contains a Transaction with Metadata describing how the LedgerEntry nodes
 were altered. It has the most complex structure of all nodes. A
@@ -63,7 +63,7 @@ length marker.
 	Key:	Hash
 	Value:	LedgerSequence:LedgerSequence:NT_TRANSACTION_NODE:HP_TRANSACTION_NODE:VL:Node:VL:Metadata:Index
 
-LedgerEntry Node
+# LedgerEntry Node
 
 This contains the state of an account after a transaction has been applied.
 Ledger Entry nodes may be reused between ledgers.
@@ -74,6 +74,5 @@ Ledger Entry nodes may be reused between ledgers.
 
 	Key:	Hash
 	Value:	LedgerSequence:LedgerSequence:NT_ACCOUNT_NODE:HP_LEAF_NODE:Node:Index
-
 */
 package data

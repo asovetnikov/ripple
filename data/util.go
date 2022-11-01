@@ -6,7 +6,7 @@ import (
 
 const hextable = "0123456789ABCDEF"
 
-//faster than fmt and need upper case!
+// faster than fmt and need upper case!
 func b2h(h []byte) []byte {
 	b := make([]byte, len(h)*2)
 	for i, v := range h {
